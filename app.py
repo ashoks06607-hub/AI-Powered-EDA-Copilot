@@ -12,6 +12,7 @@ from modules.eda import (
 
 from modules.data_quality import generate_quality_report
 from modules.feature_engineering import suggest_features
+from modules.llm_chat import ask_ai
 
 st.set_page_config(page_title="AI EDA Copilot", layout="wide")
 
