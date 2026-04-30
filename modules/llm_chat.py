@@ -1,24 +1,31 @@
+import os
+from dotenv import load_dotenv
 import google.generativeai as genai
-import streamlit as st
+
+# Load .env file
+load_dotenv()
+
+# Get API key from .env
+api_key = os.getenv("GOOGLE_API_KEY")
 
 # Configure Gemini
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+genai.configure(api_key=api_key)
 
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 
 def ask_ai(df, question):
-    """
-    Takes dataframe + question → returns AI answer
-    """
-
     context = f"""
     Dataset Summary:
     Rows: {df.shape[0]}
     Columns: {df.shape[1]}
 
-    Columns List:
-    {list(df.columns)}
+    Column Types:
+    Numerical: {df.select_dtypes(include='number').columns.tolist()}
+    Categorical: {df.select_dtypes(include='object').columns.tolist()}
+
+    Missing Values:
+    {df.isnull().sum().to_dict()}
 
     Sample Data:
     {df.head(5).to_string()}
