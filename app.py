@@ -104,5 +104,20 @@ if uploaded_file is not None:
                 st.write("**Reason:**", s["reason"])
                 st.code(s["code"], language="python")
 
+    # =========================
+    # 🤖 AI CHAT
+    # =========================
+    st.header("🤖 Ask AI About Your Data")
+
+    question = st.text_input("Ask a question about your dataset")
+
+    if question:
+      with st.spinner("Thinking..."):
+         answer = ask_ai(df, question)
+
+      st.success("AI Answer:")
+      st.write(answer)
+                
+    
 else:
     st.info("👆 Upload a CSV file to begin")
