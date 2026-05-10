@@ -8,7 +8,7 @@ def suggest_features(df):
     numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns
     cat_cols = df.select_dtypes(include=['object']).columns
 
-    # 🔹 1. LOG TRANSFORMATION
+    #  1. LOG TRANSFORMATION
     
     for col in numeric_cols:
         skew = df[col].skew()
@@ -22,7 +22,7 @@ def suggest_features(df):
             })
 
     
-    # 🔹 2. BINNING (VERY IMPORTANT)
+    #  2. BINNING (VERY IMPORTANT)
     
     for col in numeric_cols:
         if df[col].nunique() > 10:
@@ -34,7 +34,7 @@ def suggest_features(df):
             })
 
     
-    # 🔹 3. INTERACTION FEATURES
+    #  3. INTERACTION FEATURES
     
     if len(numeric_cols) >= 2:
         col1, col2 = numeric_cols[:2]
@@ -47,7 +47,7 @@ def suggest_features(df):
         })
 
     
-    # 🔹 4. ENCODING
+    #  4. ENCODING
     
     for col in cat_cols:
         if df[col].nunique() < 10:
