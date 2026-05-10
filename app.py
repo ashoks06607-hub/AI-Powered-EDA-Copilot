@@ -16,17 +16,15 @@ from modules.llm_chat import ask_ai
 
 st.set_page_config(page_title="AI EDA Copilot", layout="wide")
 
-# =========================
 # TITLE
-# =========================
+
 st.title("📊 AI EDA Copilot")
 st.markdown(
     "Analyze your dataset with **EDA, data quality checks, feature engineering suggestions, and AI insights**."
 )
 
-# =========================
 # FILE UPLOAD
-# =========================
+
 uploaded_file = st.file_uploader("Upload CSV", type=["csv"])
 
 if uploaded_file is not None:
@@ -35,9 +33,8 @@ if uploaded_file is not None:
 
     st.success("File uploaded successfully")
 
-    # =========================
     # OVERVIEW
-    # =========================
+    
     st.header("📊 Dataset Overview")
 
     overview = get_overview(df)
@@ -48,15 +45,13 @@ if uploaded_file is not None:
     col3.metric("Missing", overview["missing"])
     col4.metric("Duplicates", overview["duplicates"])
 
-    # =========================
     # COLUMN SUMMARY
-    # =========================
+    
     st.header("📋 Column Summary")
     st.dataframe(get_column_summary(df), use_container_width=True)
 
-    # =========================
     # DATA QUALITY
-    # =========================
+    
     st.header("⚠️ Data Quality Report")
     report = generate_quality_report(df)
 
@@ -65,9 +60,8 @@ if uploaded_file is not None:
     else:
         st.dataframe(report, use_container_width=True)
 
-    # =========================
     # UNIVARIATE
-    # =========================
+    
     st.header("📈 Univariate Analysis")
 
     for fig in plot_numeric_distributions(df):
@@ -76,23 +70,20 @@ if uploaded_file is not None:
     for fig in plot_categorical_distributions(df):
         st.plotly_chart(fig, use_container_width=True)
 
-    # =========================
     # BIVARIATE
-    # =========================
+    
     st.header("🔗 Bivariate Analysis")
 
     for fig in plot_bivariate(df):
         st.plotly_chart(fig, use_container_width=True)
 
-    # =========================
     # CORRELATION
-    # =========================
+    
     st.header("🔥 Correlation Heatmap")
     st.plotly_chart(plot_correlation_heatmap(df), use_container_width=True)
 
-    # =========================
     # FEATURE ENGINEERING
-    # =========================
+    
     st.header("🧠 Feature Engineering Suggestions")
 
     suggestions = suggest_features(df)
@@ -105,9 +96,9 @@ if uploaded_file is not None:
                 st.write("**Reason:**", s["reason"])
                 st.code(s["code"], language="python")
 
-    # =========================
+    
     # 🤖 AI CHAT
-    # =========================
+    
     st.header("🤖 Ask AI About Your Data")
 
     question = st.text_input("Ask a question about your dataset")
