@@ -2,9 +2,8 @@ import pandas as pd
 import plotly.express as px
 
 
-# =========================
-# 📊 DATASET OVERVIEW
-# =========================
+#  DATASET OVERVIEW
+
 def get_overview(df):
     return {
         "rows": df.shape[0],
@@ -14,9 +13,8 @@ def get_overview(df):
     }
 
 
-# =========================
-# 📋 COLUMN SUMMARY
-# =========================
+#  COLUMN SUMMARY
+
 def get_column_summary(df):
     summary = []
 
@@ -31,9 +29,8 @@ def get_column_summary(df):
     return pd.DataFrame(summary)
 
 
-# =========================
-# 📈 NUMERIC DISTRIBUTIONS
-# =========================
+#  NUMERIC DISTRIBUTIONS
+
 def plot_numeric_distributions(df):
     num_cols = df.select_dtypes(include=['int64', 'float64']).columns
     figs = []
@@ -45,9 +42,9 @@ def plot_numeric_distributions(df):
     return figs
 
 
-# =========================
-# 📊 CATEGORICAL DISTRIBUTIONS
-# =========================
+
+# CATEGORICAL DISTRIBUTIONS
+
 def plot_categorical_distributions(df):
     cat_cols = df.select_dtypes(include=['object']).columns
     figs = []
@@ -62,9 +59,8 @@ def plot_categorical_distributions(df):
     return figs
 
 
-# =========================
-# 🔗 BIVARIATE ANALYSIS
-# =========================
+# BIVARIATE ANALYSIS
+
 def plot_bivariate(df):
     figs = []
 
@@ -95,9 +91,8 @@ def plot_bivariate(df):
     return figs
 
 
-# =========================
-# 🔥 CORRELATION HEATMAP
-# =========================
+#  CORRELATION HEATMAP
+
 def plot_correlation_heatmap(df):
     corr = df.corr(numeric_only=True)
 
