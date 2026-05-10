@@ -9,7 +9,7 @@ def generate_quality_report(df):
         missing_pct = df[col].isnull().mean() * 100
         unique = df[col].nunique()
 
-        # 🔴 Missing values
+        #  Missing values
         if missing_pct > 30:
             report.append({
                 "column": col,
@@ -18,7 +18,7 @@ def generate_quality_report(df):
                 "recommendation": "Consider dropping or imputing"
             })
 
-        # 🔴 Constant column
+        #  Constant column
         if unique == 1:
             report.append({
                 "column": col,
@@ -27,7 +27,7 @@ def generate_quality_report(df):
                 "recommendation": "Drop this column"
             })
 
-        # 🔴 High cardinality
+        #  High cardinality
         if unique > 100:
             report.append({
                 "column": col,
@@ -36,7 +36,7 @@ def generate_quality_report(df):
                 "recommendation": "Use encoding or grouping"
             })
 
-        # 🔴 Skewness (only numeric)
+        #  Skewness (only numeric)
         if df[col].dtype in ["int64", "float64"]:
             skew = df[col].skew()
 
